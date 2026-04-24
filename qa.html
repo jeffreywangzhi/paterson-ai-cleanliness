@@ -39,7 +39,7 @@
 
 <div class="page-header">
   <h1>Limitations &amp; Anticipated Q&amp;A</h1>
-  <div class="subtitle">What the system still cannot do, and the answers to the most likely questions.</div>
+  <div class="subtitle">What the system still cannot do today, and answers to common questions.</div>
 </div>
 
 <div class="highlight-bar">
@@ -91,7 +91,7 @@
 
 <div class="limit">
   <h3>4. Facility false positives</h3>
-  <p>Frames 47 and 48 on R-75 are the city's garbage depot. AI correctly detected clutter, but no enforcement should occur there. Production needs a facility exclusion list from Bandana.</p>
+  <p>Frames 47 and 48 on R-75 are the city's garbage depot. AI correctly detected clutter, but no enforcement should occur there. Production needs a facility exclusion list from the city.</p>
 </div>
 
 <div class="limit">
@@ -101,7 +101,7 @@
 
 <div class="limit">
   <h3>6. GPS availability on new footage</h3>
-  <p>Bandana's April 16 videos don't have synchronized GPS. Bulk item detection works (image-only), but address matching requires Samsara's dual video+GPS export path.</p>
+  <p>The April 16 videos don't have synchronized GPS. Bulk item detection works (image-only), but address matching requires Samsara's dual video+GPS export path.</p>
 </div>
 
 <div class="limit">
@@ -109,7 +109,7 @@
   <p>City legal restrictions prevent sharing property owner data. Warning letters use placeholder names; "shotgun approach" matches top 5 nearest properties. In production, the city plugs its owner database into the pipeline — the system never sees it.</p>
 </div>
 
-<h2 class="section-title">Anticipated Q&amp;A</h2>
+<h2 class="section-title">Frequently Asked Questions</h2>
 
 <div class="qa">
   <div class="q">How did you get from your previous scoring to KAB 1-4?</div>
@@ -158,17 +158,12 @@
 
 <div class="qa">
   <div class="q">The previous version had confidence levels like HIGH/MEDIUM/LOW. What happened to that?</div>
-  <div class="a">Removed. Those tiers were causing the exact problem Edward called out last meeting — we were comparing a confidence tier to a human category, not a real calibration. Now everything is KAB 1-4 on both sides.</div>
+  <div class="a">Removed. Those tiers were comparing a confidence label to a human category rather than a real calibration. Everything is now KAB 1-4 on both the human and AI side, which is a like-for-like comparison.</div>
 </div>
 
 <div class="qa">
   <div class="q">Why did you use sofas as an example and not mattresses or refrigerators?</div>
-  <div class="a">Because that's what was in Bandana's actual footage. We detected whatever was there. The prompt lists all bulk item types (sofa, mattress, refrigerator, TV, tire, construction debris, large appliance, furniture). If a mattress appears in future footage, it will be detected by name.</div>
-</div>
-
-<div class="qa">
-  <div class="q">What if we don't know the answer to a specific question?</div>
-  <div class="a">"That's a detailed technical question. Guangyuan can follow up with you directly after the meeting with the specifics." Don't guess. Don't make up numbers.</div>
+  <div class="a">Because that's what was in the city-provided footage. We detected whatever was there. The prompt lists all bulk item types (sofa, mattress, refrigerator, TV, tire, construction debris, large appliance, furniture). If a mattress appears in future footage, it will be detected by name.</div>
 </div>
 
 <h2 class="section-title">Next Steps &amp; Capstone Scope</h2>
@@ -177,12 +172,12 @@
   <ul>
     <li>All system code, validated across three datasets, is packaged and handoff-ready (this delivery package).</li>
     <li>The NYU capstone poster and final presentation are due around May 1, presenting at the CUSP showcase.</li>
-    <li>Two production-enablement items need the city's input: (1) a facility exclusion list from Bandana, and (2) clarification on whether Samsara GPS can be included with video exports. These aren't blockers for the capstone handoff, but they are required for production enforcement.</li>
+    <li>Two production-enablement items need the city's input: (1) a facility location exclusion list, and (2) clarification on whether Samsara GPS can be included with video exports. These aren't blockers for the capstone handoff, but they are required for production enforcement.</li>
   </ul>
   <p>We have working cross-vehicle validation, a human-calibrated accuracy dataset, and verified bulk item detection.</p>
 </div>
 
-<div class="footer">Source: <code>07_TECHNICAL_DOCS/</code>, presentation script, and README · USI-P21 · NYU CUSP Capstone</div>
+<div class="footer">USI-P21 · NYU CUSP Capstone · City of Paterson, NJ · April 2026</div>
 </div>
 </body>
 </html>
