@@ -8,9 +8,18 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
-    background: #f5f5f7; color: #1d1d1f; padding: 32px; line-height: 1.55;
+    background: #f5f5f7; color: #1d1d1f; padding: 0; line-height: 1.55;
   }
-  .container { max-width: 1180px; margin: 0 auto; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 32px; }
+
+  .topnav { background: #1d1d1f; color: white; padding: 14px 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+  .topnav-inner { max-width: 1180px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .topnav-brand { font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: white; text-transform: uppercase; }
+  .topnav-brand .sub { color: #6e6e73; font-weight: 500; margin-left: 8px; text-transform: none; letter-spacing: 0; }
+  .topnav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+  .topnav-links a { color: #d2d2d7; text-decoration: none; font-size: 13px; padding: 6px 12px; border-radius: 6px; transition: background 0.15s, color 0.15s; }
+  .topnav-links a:hover { background: #2c2c2e; color: white; }
+  .topnav-links a.active { background: #34c759; color: white; font-weight: 600; }
 
   .header { text-align: center; margin-bottom: 36px; }
   .header h1 { font-size: 30px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.3px; }
@@ -130,6 +139,22 @@
 </style>
 </head>
 <body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">USI-P21<span class="sub">AI Street Cleanliness · City of Paterson, NJ</span></div>
+    <div class="topnav-links">
+      <a href="index.html" class="active">Calibration</a>
+      <a href="bulk_items.html">Bulk Items</a>
+      <a href="route_maps.html">Route Maps</a>
+      <a href="evidence.html">Evidence</a>
+      <a href="reasoning.html">Human Reasoning</a>
+      <a href="letters.html">Warning Letters</a>
+      <a href="qa.html">Limitations &amp; Q&amp;A</a>
+    </div>
+  </div>
+</nav>
+
 <div class="container">
 
 <div class="header">

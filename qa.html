@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Limitations & Q&A · USI-P21</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .qa { background: white; border-radius: 14px; padding: 24px 28px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  .qa .q { font-weight: 700; font-size: 15px; color: #1d1d1f; margin-bottom: 10px; }
+  .qa .q::before { content: "Q · "; color: #007aff; font-weight: 800; }
+  .qa .a { color: #3a3a3f; font-size: 14px; line-height: 1.65; }
+  .qa .a::before { content: "A · "; color: #34c759; font-weight: 800; }
+  .limit { background: white; border-radius: 14px; padding: 24px 28px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-left: 4px solid #ff9500; }
+  .limit h3 { font-size: 16px; margin-bottom: 10px; }
+  .limit .lbl { font-size: 11px; font-weight: 700; color: #6e6e73; letter-spacing: 0.5px; text-transform: uppercase; margin-top: 10px; margin-bottom: 4px; }
+  .limit p { margin-bottom: 8px; font-size: 14px; color: #3a3a3f; }
+  .limit ul { margin: 0 0 8px 20px; font-size: 14px; color: #3a3a3f; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">USI-P21<span class="sub">AI Street Cleanliness · City of Paterson, NJ</span></div>
+    <div class="topnav-links">
+      <a href="index.html">Calibration</a>
+      <a href="bulk_items.html">Bulk Items</a>
+      <a href="route_maps.html">Route Maps</a>
+      <a href="evidence.html">Evidence</a>
+      <a href="reasoning.html">Human Reasoning</a>
+      <a href="letters.html">Warning Letters</a>
+      <a href="qa.html" class="active">Limitations &amp; Q&amp;A</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+<div class="page-header">
+  <h1>Limitations &amp; Anticipated Q&amp;A</h1>
+  <div class="subtitle">What the system still cannot do, and the answers to the most likely questions.</div>
+</div>
+
+<div class="highlight-bar">
+  <div class="tag">Key numbers</div>
+  <h2>173 frames analyzed · 86% exact human/AI match · 0 disagreements ≥2 points · $1.37 total cost · 105+ letters generated</h2>
+  <p>Three datasets validated: R-75 (calibration, 39 frames), R-21 (cross-vehicle, 44 frames), and new April 16 footage (bulk item stress test, 90 frames).</p>
+</div>
+
+<h2 class="section-title">Key Numbers to Remember</h2>
+<table class="data">
+  <thead><tr><th>Metric</th><th style="text-align:right;">Value</th></tr></thead>
+  <tbody>
+    <tr><td>Total frames across 3 datasets</td><td class="num">173</td></tr>
+    <tr><td>Human calibration: exact match</td><td class="num">86% (30 of 35)</td></tr>
+    <tr><td>Human calibration: within ±1</td><td class="num">100% (35 of 35)</td></tr>
+    <tr><td>Bulk item detections (April 16 footage)</td><td class="num">10 frames</td></tr>
+    <tr><td>Dumping hotspot length (consecutive frames)</td><td class="num">5 frames</td></tr>
+    <tr><td>Total AI cost across all analyses</td><td class="num">$1.37</td></tr>
+    <tr><td>Cost per 10-minute video</td><td class="num">$0.15–0.22</td></tr>
+    <tr><td>Production cost estimate (10 trucks/week)</td><td class="num">$200–350</td></tr>
+  </tbody>
+</table>
+
+<h2 class="section-title">Known Limitations (be honest about these)</h2>
+
+<div class="limit">
+  <h3>1. Resolution — highest priority</h3>
+  <p>Dashcam footage is 640×360 pixels. A plastic bottle occupies 3–5 pixels. In 3 of 39 validated R-75 frames, even the human labeler could not distinguish snow from litter on a full-screen monitor.</p>
+  <div class="lbl">Mitigation</div>
+  <ul>
+    <li>Conservative prompt: "When in doubt about small items, score 1 and mark uncertain=true."</li>
+    <li>R-21 tested at 960×540 showed noticeably cleaner detection.</li>
+  </ul>
+  <div class="lbl">Recommendation</div>
+  <p>Production deployment should use higher-resolution dashcams. This single change would have the largest impact on accuracy.</p>
+</div>
+
+<div class="limit">
+  <h3>2. KAB methodology mismatch</h3>
+  <p>KAB was designed for trained human inspectors sitting in a van at full visual resolution, scoring overall impression at driving speed. Our AI sees one forward-facing frame at 640×360. Even KAB uses 3–6 inspectors and averages because borderline cases are inherently ambiguous. We align well on clearly clean vs clearly dirty, but 1-vs-2 boundaries have ±1 variance.</p>
+  <div class="lbl">Mitigation</div>
+  <p>The <code>uncertain</code> field flags borderline cases for human review.</p>
+</div>
+
+<div class="limit">
+  <h3>3. Counting is unreliable</h3>
+  <p>GPT-4o cannot reliably count individual small objects. Our scoring uses visual impression matching KAB's text definitions — which mirrors how human KAB inspectors actually work.</p>
+</div>
+
+<div class="limit">
+  <h3>4. Facility false positives</h3>
+  <p>Frames 47 and 48 on R-75 are the city's garbage depot. AI correctly detected clutter, but no enforcement should occur there. Production needs a facility exclusion list from Bandana.</p>
+</div>
+
+<div class="limit">
+  <h3>5. Curbside collection context</h3>
+  <p>On collection days, residents legitimately place trash bins and bags at the curb. Current prompt explicitly treats curbside bins as NOT a violation. Collection-day timing integration is a documented future-work item.</p>
+</div>
+
+<div class="limit">
+  <h3>6. GPS availability on new footage</h3>
+  <p>Bandana's April 16 videos don't have synchronized GPS. Bulk item detection works (image-only), but address matching requires Samsara's dual video+GPS export path.</p>
+</div>
+
+<div class="limit">
+  <h3>7. Owner data privacy</h3>
+  <p>City legal restrictions prevent sharing property owner data. Warning letters use placeholder names; "shotgun approach" matches top 5 nearest properties. In production, the city plugs its owner database into the pipeline — the system never sees it.</p>
+</div>
+
+<h2 class="section-title">Anticipated Q&amp;A</h2>
+
+<div class="qa">
+  <div class="q">How did you get from your previous scoring to KAB 1-4?</div>
+  <div class="a">Our previous output used confidence tiers like LOW/MEDIUM/HIGH. We rewrote the prompt to directly output KAB 1-4 integers on each of the five indices, with evidence and rule fields attached to every score. The <a href="index.html">Calibration Report</a> shows the match against human labels.</div>
+</div>
+
+<div class="qa">
+  <div class="q">Does the system detect every bulk item?</div>
+  <div class="a">It detects the ones clearly visible. In 90 frames of April 16 footage it caught 10 frames with bulk items. At 640×360, items partially obscured or at the extreme edge of frame can be missed. Frame 42 in the R-75 route is an example — a small cardboard box partially hidden behind a parked car that even the human labeler had to search to see.</div>
+</div>
+
+<div class="qa">
+  <div class="q">Can the system count items?</div>
+  <div class="a">No. GPT-4o has known limitations counting small individual objects. Instead, we use visual impression scoring matching KAB's text definitions. This matches how KAB human inspectors actually work — they score impression at driving speed, not by counting.</div>
+</div>
+
+<div class="qa">
+  <div class="q">What about false positives?</div>
+  <div class="a">Out of 35 decidable frames in the calibration set, AI produced two moderate-level false positives, both at score 2 (not severe). Frame 0041 misread dried liquid residue and building wall shadow as graffiti. Frame 0023 misread snow patches as graffiti. Both are at the 640×360 resolution floor — higher resolution would eliminate this class of error.</div>
+</div>
+
+<div class="qa">
+  <div class="q">When can this go into production?</div>
+  <div class="a">The pipeline runs today. For production deployment, the city needs three things: an OpenAI API account, a facility exclusion list, and synchronized GPS+video exports from Samsara. The <code>06_SOURCE_CODE/</code> folder is ready to hand off.</div>
+</div>
+
+<div class="qa">
+  <div class="q">How much does it cost?</div>
+  <div class="a">$0.15–0.22 per 10-minute video. Pilot of 5 trucks/week: $30–50. Full city with 10 trucks weekly: $200–350. Monthly: $800–1,400.</div>
+</div>
+
+<div class="qa">
+  <div class="q">What about real-time detection?</div>
+  <div class="a">Not in scope for this capstone. The current system processes recorded footage, which is cheaper and more reliable than real-time. Real-time is documented as a recommended future enhancement.</div>
+</div>
+
+<div class="qa">
+  <div class="q">Can you show us a specific warning letter?</div>
+  <div class="a">Yes — they're on the <a href="letters.html">Warning Letters</a> page. We use a placeholder owner name because of the city's legal restriction on sharing owner data. In production, the city plugs in its property owner database — we never see that data.</div>
+</div>
+
+<div class="qa">
+  <div class="q">How do we know the AI is actually right and not hallucinating?</div>
+  <div class="a">The <a href="index.html">Calibration Report</a> is the answer. 35 frames, human-scored independently, compared to AI output: 86% exact match, 0 disagreements of ≥2 points. Every AI score is accompanied by an evidence field listing what it saw, which you can verify against the image on the <a href="evidence.html">Evidence Cards</a> page.</div>
+</div>
+
+<div class="qa">
+  <div class="q">The previous version had confidence levels like HIGH/MEDIUM/LOW. What happened to that?</div>
+  <div class="a">Removed. Those tiers were causing the exact problem Edward called out last meeting — we were comparing a confidence tier to a human category, not a real calibration. Now everything is KAB 1-4 on both sides.</div>
+</div>
+
+<div class="qa">
+  <div class="q">Why did you use sofas as an example and not mattresses or refrigerators?</div>
+  <div class="a">Because that's what was in Bandana's actual footage. We detected whatever was there. The prompt lists all bulk item types (sofa, mattress, refrigerator, TV, tire, construction debris, large appliance, furniture). If a mattress appears in future footage, it will be detected by name.</div>
+</div>
+
+<div class="qa">
+  <div class="q">What if we don't know the answer to a specific question?</div>
+  <div class="a">"That's a detailed technical question. Guangyuan can follow up with you directly after the meeting with the specifics." Don't guess. Don't make up numbers.</div>
+</div>
+
+<h2 class="section-title">Next Steps &amp; Capstone Scope</h2>
+<div class="card">
+  <p>With about 10 days to project close on May 4:</p>
+  <ul>
+    <li>All system code, validated across three datasets, is packaged and handoff-ready (this delivery package).</li>
+    <li>The NYU capstone poster and final presentation are due around May 1, presenting at the CUSP showcase.</li>
+    <li>Two production-enablement items need the city's input: (1) a facility exclusion list from Bandana, and (2) clarification on whether Samsara GPS can be included with video exports. These aren't blockers for the capstone handoff, but they are required for production enforcement.</li>
+  </ul>
+  <p>We have working cross-vehicle validation, a human-calibrated accuracy dataset, and verified bulk item detection.</p>
+</div>
+
+<div class="footer">Source: <code>07_TECHNICAL_DOCS/</code>, presentation script, and README · USI-P21 · NYU CUSP Capstone</div>
+</div>
+</body>
+</html>

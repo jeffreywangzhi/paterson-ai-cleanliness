@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Route Maps · USI-P21</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">USI-P21<span class="sub">AI Street Cleanliness · City of Paterson, NJ</span></div>
+    <div class="topnav-links">
+      <a href="index.html">Calibration</a>
+      <a href="bulk_items.html">Bulk Items</a>
+      <a href="route_maps.html" class="active">Route Maps</a>
+      <a href="evidence.html">Evidence</a>
+      <a href="reasoning.html">Human Reasoning</a>
+      <a href="letters.html">Warning Letters</a>
+      <a href="qa.html">Limitations &amp; Q&amp;A</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container wide">
+
+<div class="page-header">
+  <h1>Interactive Route Maps</h1>
+  <div class="subtitle">Color-coded severity markers plotted against GPS track. Click any marker for KAB scores, bulk items, and AI reasoning.</div>
+</div>
+
+<div class="tab-switcher">
+  <button class="active" data-tab="r75">R-75 · Jan 23, 2026</button>
+  <button data-tab="r21">R-21 · Mar 2, 2026</button>
+</div>
+
+<div id="tab-r75" class="tab-pane active">
+  <div class="card" style="padding: 18px 22px; margin-bottom: 14px;">
+    <div style="display:flex; gap:32px; flex-wrap:wrap; align-items:center;">
+      <div><strong>Route:</strong> R-75</div>
+      <div><strong>Date:</strong> January 23, 2026 (winter, snow)</div>
+      <div><strong>Resolution:</strong> 640×360</div>
+      <div><strong>Frames:</strong> 39 analyzed</div>
+      <div><strong>Status:</strong> <span class="tag-pill info">Human-validated calibration set</span></div>
+    </div>
+  </div>
+  <iframe src="route_maps/R75_Jan23_Route_Map.html" class="map-frame" title="R-75 Route Map"></iframe>
+</div>
+
+<div id="tab-r21" class="tab-pane">
+  <div class="card" style="padding: 18px 22px; margin-bottom: 14px;">
+    <div style="display:flex; gap:32px; flex-wrap:wrap; align-items:center;">
+      <div><strong>Route:</strong> R-21</div>
+      <div><strong>Date:</strong> March 2, 2026 (spring, no snow)</div>
+      <div><strong>Resolution:</strong> 960×540</div>
+      <div><strong>Frames:</strong> 44 analyzed</div>
+      <div><strong>Status:</strong> <span class="tag-pill info">Cross-vehicle validation · 2 bulk item violations</span></div>
+    </div>
+  </div>
+  <iframe src="route_maps/R21_Mar02_Route_Map.html" class="map-frame" title="R-21 Route Map"></iframe>
+</div>
+
+<h2 class="section-title">How to read these maps</h2>
+<div class="card">
+  <ul>
+    <li><strong>Green markers</strong> — KAB all 1s, clean street (no action).</li>
+    <li><strong>Yellow / orange markers</strong> — Elevated scores on at least one index (2 or 3).</li>
+    <li><strong>Red markers</strong> — KAB level 4 or illegal dumping detected (warning letter candidate).</li>
+    <li><strong>Click any marker</strong> to see per-index KAB scores, AI evidence text, bulk items detected, and the assigned street address.</li>
+    <li><strong>R-75 frames 0047 &amp; 0048</strong> are the city's garbage depot. AI correctly detected clutter, but these should be excluded from enforcement via a facility exclusion list.</li>
+  </ul>
+</div>
+
+<div class="footer">USI-P21 · NYU CUSP Capstone · Interactive maps generated with Folium</div>
+</div>
+
+<script>
+  document.querySelectorAll('.tab-switcher button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-switcher button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

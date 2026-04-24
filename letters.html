@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Warning Letters Sample · USI-P21</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">USI-P21<span class="sub">AI Street Cleanliness · City of Paterson, NJ</span></div>
+    <div class="topnav-links">
+      <a href="index.html">Calibration</a>
+      <a href="bulk_items.html">Bulk Items</a>
+      <a href="route_maps.html">Route Maps</a>
+      <a href="evidence.html">Evidence</a>
+      <a href="reasoning.html">Human Reasoning</a>
+      <a href="letters.html" class="active">Warning Letters</a>
+      <a href="qa.html">Limitations &amp; Q&amp;A</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container wide">
+
+<div class="page-header">
+  <h1>Auto-Generated Warning Letters</h1>
+  <div class="subtitle">Edward's core deliverable: the pipeline converts each flagged frame into one letter per nearby property, using placeholder owner names (city's property database plugs in during production).</div>
+</div>
+
+<div class="highlight-bar">
+  <div class="tag">Shotgun address matching</div>
+  <h2>Each flagged frame produces 5 letters — one for each of the 5 nearest properties — because we cannot precisely identify which specific property is responsible.</h2>
+  <p>Owner data never leaves the city's systems. The pipeline accepts owner records as input and never stores them. Legal privacy compliance by design.</p>
+</div>
+
+<div class="metrics">
+  <div class="metric blue"><div class="value">20</div><div class="label">Sample letters in this package</div></div>
+  <div class="metric orange"><div class="value">4</div><div class="label">Source frames (R-75 + R-21)</div></div>
+  <div class="metric green"><div class="value">105+</div><div class="label">Letters generated across all routes</div></div>
+  <div class="metric purple"><div class="value">$0</div><div class="label">Marginal cost per letter</div></div>
+</div>
+
+<div class="letter-list">
+  <div class="list" id="letter-list"></div>
+  <pre class="letter-view" id="letter-view">Select a letter from the list to preview.</pre>
+</div>
+
+<div class="footer">Source: <code>05_WARNING_LETTERS_SAMPLE/</code> · USI-P21 · NYU CUSP Capstone</div>
+</div>
+
+<script>
+  const letters = {
+    'R-75 · Jan 23 · Frame 0022 (litter 3/4 — gold standard case)': [
+      'warning_frame_0022.png_708_E_22ND_ST_Paterson_NJ.txt',
+      'warning_frame_0022.png_710_E_22ND_ST_Paterson_NJ.txt',
+      'warning_frame_0022.png_714_E_22ND_ST_Paterson_NJ.txt',
+      'warning_frame_0022.png_716_E_22ND_ST_Paterson_NJ.txt',
+      'warning_frame_0022.png_718_E_22ND_ST_Paterson_NJ.txt',
+    ],
+    'R-75 · Jan 23 · Frame 0023': [
+      'warning_frame_0023.png_668_E_22ND_ST_Paterson_NJ.txt',
+      'warning_frame_0023.png_669_E_22ND_ST_Paterson_NJ.txt',
+      'warning_frame_0023.png_670_E_22ND_ST_Paterson_NJ.txt',
+      'warning_frame_0023.png_671_E_22ND_ST_Paterson_NJ.txt',
+      'warning_frame_0023.png_672_E_22ND_ST_Paterson_NJ.txt',
+    ],
+    'R-21 · Mar 2 · Frame 0009': [
+      'warning_frame_0009.png_660_E_23RD_ST_Paterson_NJ.txt',
+      'warning_frame_0009.png_664_E_23RD_ST_Paterson_NJ.txt',
+      'warning_frame_0009.png_665_E_23RD_ST_Paterson_NJ.txt',
+      'warning_frame_0009.png_666-668_E_23RD_ST_Paterson_NJ.txt',
+      'warning_frame_0009.png_667_E_23RD_ST_Paterson_NJ.txt',
+    ],
+    'R-21 · Mar 2 · Frame 0011': [
+      'warning_frame_0011.png_9_E_21ST_ST_Paterson_NJ.txt',
+      'warning_frame_0011.png_11_E_21ST_ST_Paterson_NJ.txt',
+      'warning_frame_0011.png_13_E_21ST_ST_Paterson_NJ.txt',
+      'warning_frame_0011.png_15_E_21ST_ST_Paterson_NJ.txt',
+      'warning_frame_0011.png_17_E_21ST_ST_Paterson_NJ.txt',
+    ],
+  };
+
+  const listEl = document.getElementById('letter-list');
+  const viewEl = document.getElementById('letter-view');
+  let firstBtn = null;
+
+  Object.entries(letters).forEach(([group, files]) => {
+    const label = document.createElement('div');
+    label.className = 'group-label';
+    label.textContent = group;
+    listEl.appendChild(label);
+    const folder = group.startsWith('R-75') ? 'R75' : 'R21';
+    files.forEach(f => {
+      const btn = document.createElement('button');
+      const addr = f.replace(/^warning_frame_\d+\.png_/, '').replace(/_Paterson_NJ\.txt$/, '').replace(/_/g, ' ');
+      btn.textContent = addr;
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#letter-list button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        fetch(`warning_letters/${folder}/${f}`)
+          .then(r => r.text())
+          .then(t => viewEl.textContent = t)
+          .catch(e => viewEl.textContent = 'Error loading letter: ' + e);
+      });
+      listEl.appendChild(btn);
+      if (!firstBtn) firstBtn = btn;
+    });
+  });
+
+  if (firstBtn) firstBtn.click();
+</script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evidence Cards · USI-P21</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">USI-P21<span class="sub">AI Street Cleanliness · City of Paterson, NJ</span></div>
+    <div class="topnav-links">
+      <a href="index.html">Calibration</a>
+      <a href="bulk_items.html">Bulk Items</a>
+      <a href="route_maps.html">Route Maps</a>
+      <a href="evidence.html" class="active">Evidence</a>
+      <a href="reasoning.html">Human Reasoning</a>
+      <a href="letters.html">Warning Letters</a>
+      <a href="qa.html">Limitations &amp; Q&amp;A</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container wide">
+
+<div class="page-header">
+  <h1>Evidence Cards</h1>
+  <div class="subtitle">Every flagged frame produces an evidence card: original dashcam image on the left, AI's KAB reasoning broken down by index on the right. If a score is ever questioned, open the card — no need to rerun the pipeline.</div>
+</div>
+
+<div class="highlight-bar">
+  <div class="tag">Why this matters</div>
+  <h2>Every AI score is traceable. Each card shows what the AI saw, which KAB rule it applied, and the resulting score — plus bulk items and uncertainty flags.</h2>
+  <p>This is the direct answer to "how does AI decide between a 1 and a 3" — it's all readable right on the card.</p>
+</div>
+
+<div class="tab-switcher">
+  <button class="active" data-tab="new">New Videos · Apr 16 (15)</button>
+  <button data-tab="r75">R-75 · Human Validated (6)</button>
+  <button data-tab="r21">R-21 · New Prompt (8)</button>
+</div>
+
+<div id="tab-new" class="tab-pane active">
+  <div class="section-note">Bandana's April 16 footage — 10 frames with bulk items detected across sofa, furniture, trash bags, tarp. Includes a 5-frame dumping hotspot (v2_frame_0013–0017).</div>
+  <div class="img-grid" id="grid-new"></div>
+</div>
+
+<div id="tab-r75" class="tab-pane">
+  <div class="section-note">R-75 route, Jan 23, 2026. These are the flagged frames from the fully human-validated calibration set (39 frames). <strong>Frame 0022</strong> is the gold-standard positive case — human and AI both scored litter = 3.</div>
+  <div class="img-grid" id="grid-r75"></div>
+</div>
+
+<div id="tab-r21" class="tab-pane">
+  <div class="section-note">R-21 route, Mar 2, 2026 — cross-vehicle validation at 960×540 resolution. These are the flagged frames, including two confirmed bulk item violations (sofa, trash bags).</div>
+  <div class="img-grid" id="grid-r21"></div>
+</div>
+
+<div class="footer">Click any card to enlarge · 29 evidence cards total · USI-P21 · NYU CUSP Capstone</div>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <img id="lightbox-img" src="" alt="">
+  <div class="caption" id="lightbox-cap"></div>
+</div>
+
+<script>
+  const newVideos = [
+    ['evidence_v1_frame_0007.png', 'V1 · Frame 7 — textbook sofa case', ['bulk:sofa','bulk:furniture','dump:DUMPING','lit2:Storage 2/4']],
+    ['evidence_v1_frame_0026.png', 'V1 · Frame 26', ['bulk:sofa']],
+    ['evidence_v2_frame_0003.png', 'V2 · Frame 3 — hotspot start', ['bulk:trash bags','dump:DUMPING','lit4:Litter 4/4']],
+    ['evidence_v2_frame_0005.png', 'V2 · Frame 5', ['bulk:trash bags','dump:DUMPING']],
+    ['evidence_v2_frame_0012.png', 'V2 · Frame 12', ['lit2:Litter 2/4']],
+    ['evidence_v2_frame_0013.png', 'V2 · Frame 13 — hotspot core', ['bulk:trash bags','dump:DUMPING','lit4:Litter 4/4']],
+    ['evidence_v2_frame_0014.png', 'V2 · Frame 14', ['bulk:trash bags','dump:DUMPING','lit3:Litter 3/4']],
+    ['evidence_v2_frame_0015.png', 'V2 · Frame 15', ['bulk:trash bags','lit2:Litter 2/4']],
+    ['evidence_v2_frame_0016.png', 'V2 · Frame 16', ['bulk:trash bags','dump:DUMPING','lit4:Litter 4/4']],
+    ['evidence_v2_frame_0017.png', 'V2 · Frame 17 — hotspot end', ['bulk:trash bags','dump:DUMPING','lit3:Litter 3/4']],
+    ['evidence_v2_frame_0030.png', 'V2 · Frame 30 — clean (graffiti)', ['neutral:no violation']],
+    ['evidence_v3_frame_0006.png', 'V3 · Frame 6', ['lit2:Litter 2/4']],
+    ['evidence_v3_frame_0008.png', 'V3 · Frame 8', ['lit2:Litter 2/4']],
+    ['evidence_v3_frame_0013.png', 'V3 · Frame 13 — tarp (generalized)', ['bulk:tarp']],
+    ['evidence_v3_frame_0016.png', 'V3 · Frame 16', ['lit2:Litter 2/4']],
+  ];
+  const r75 = [
+    ['evidence_frame_0022.png', 'Frame 22 — gold standard litter (H=AI=3)', ['lit3:Litter 3/4','info:MATCH']],
+    ['evidence_frame_0023.png', 'Frame 23 — snow misread as graffiti', ['lit2:Graffiti 2/4 (FP)']],
+    ['evidence_frame_0034.png', 'Frame 34 — storage ±1 disagreement', ['lit2:Storage 2/4']],
+    ['evidence_frame_0041.png', 'Frame 41 — dried residue misread', ['lit2:Litter 2/4 (FP)']],
+    ['evidence_frame_0047.png', 'Frame 47 — city facility (exclude)', ['neutral:FACILITY']],
+    ['evidence_frame_0048.png', 'Frame 48 — truck depot (exclude)', ['neutral:FACILITY']],
+  ];
+  const r21 = [
+    ['evidence_frame_0009.png', 'R-21 · Frame 9', ['bulk:trash bags','dump:DUMPING']],
+    ['evidence_frame_0011.png', 'R-21 · Frame 11', ['bulk:sofa','dump:DUMPING']],
+    ['evidence_frame_0017.png', 'R-21 · Frame 17', ['lit2:Litter 2/4']],
+    ['evidence_frame_0023.png', 'R-21 · Frame 23', ['lit2:Litter 2/4']],
+    ['evidence_frame_0038.png', 'R-21 · Frame 38', ['lit2:Storage 2/4']],
+    ['evidence_frame_0039.png', 'R-21 · Frame 39', ['lit2:Litter 2/4']],
+    ['evidence_frame_0043.png', 'R-21 · Frame 43', ['lit2:Litter 2/4']],
+    ['evidence_frame_0058.png', 'R-21 · Frame 58', ['lit2:Storage 2/4']],
+  ];
+
+  function render(gridId, folder, items) {
+    const grid = document.getElementById(gridId);
+    items.forEach(([file, title, tags]) => {
+      const path = `evidence_cards/${folder}/${file}`;
+      const tagHtml = tags.map(t => {
+        const [cls, label] = t.split(':');
+        return `<span class="tag-pill ${cls}">${label}</span>`;
+      }).join('');
+      const tile = document.createElement('div');
+      tile.className = 'img-tile';
+      tile.dataset.src = path;
+      tile.dataset.cap = `${file} · ${title}`;
+      tile.innerHTML = `<img src="${path}" alt="${file}"><div class="caption"><div class="fname">${file}</div>${tagHtml}<div class="meta" style="margin-top:8px;">${title}</div></div>`;
+      grid.appendChild(tile);
+    });
+  }
+  render('grid-new', 'new_videos_bulk_items', newVideos);
+  render('grid-r75', 'R75_human_validated', r75);
+  render('grid-r21', 'R21_new_prompt', r21);
+
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const lbCap = document.getElementById('lightbox-cap');
+  document.querySelectorAll('.img-tile').forEach(t => {
+    t.addEventListener('click', () => {
+      lbImg.src = t.dataset.src;
+      lbCap.textContent = t.dataset.cap || '';
+      lb.classList.add('open');
+    });
+  });
+  lb.addEventListener('click', () => lb.classList.remove('open'));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+
+  document.querySelectorAll('.tab-switcher button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-switcher button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

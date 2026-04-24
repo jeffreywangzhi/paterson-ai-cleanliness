@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bulk Item Detection Demo · USI-P21</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">USI-P21<span class="sub">AI Street Cleanliness · City of Paterson, NJ</span></div>
+    <div class="topnav-links">
+      <a href="index.html">Calibration</a>
+      <a href="bulk_items.html" class="active">Bulk Items</a>
+      <a href="route_maps.html">Route Maps</a>
+      <a href="evidence.html">Evidence</a>
+      <a href="reasoning.html">Human Reasoning</a>
+      <a href="letters.html">Warning Letters</a>
+      <a href="qa.html">Limitations &amp; Q&amp;A</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+<div class="page-header">
+  <h1>Bulk Item Detection Demo</h1>
+  <div class="subtitle">Bandana's April 16 footage · 3 videos · 90 frames · cropped to 640×360 · no GPS</div>
+</div>
+
+<div class="highlight-bar">
+  <div class="tag">Validation on new footage</div>
+  <h2>10 frames with bulk items detected across sofa, furniture, trash bags, and tarp — including a 5-frame dumping hotspot.</h2>
+  <p>Bandana uploaded 20 new videos on April 22 specifically to test bulk item detection. We pulled three, cropped black borders to 640×360, and ran them through the pipeline.</p>
+</div>
+
+<div class="metrics">
+  <div class="metric blue"><div class="value">90</div><div class="label">Frames analyzed</div></div>
+  <div class="metric red"><div class="value">10</div><div class="label">Frames with bulk items</div></div>
+  <div class="metric orange"><div class="value">7</div><div class="label">Illegal dumping flags</div></div>
+  <div class="metric green"><div class="value">$0.76</div><div class="label">Total AI cost</div></div>
+</div>
+
+<h2 class="section-title">Video 2 — Dumping Hotspot (5 consecutive frames)</h2>
+<div class="section-note">Five consecutive frames detected trash bags at the same location, severity scores ranging from 2 to 4. In production, repeated detection at the same address would trigger enforcement priority. This is the strongest evidence that the system can detect persistent violations, not just one-off frames.</div>
+
+<div class="img-grid">
+  <div class="img-tile" data-src="evidence_cards/new_videos_bulk_items/evidence_v2_frame_0003.png" data-cap="v2_frame_0003 · trash bags · DUMPING · Litter 4/4">
+    <img src="evidence_cards/new_videos_bulk_items/evidence_v2_frame_0003.png" alt="v2_frame_0003">
+    <div class="caption"><div class="fname">v2_frame_0003.png</div><span class="tag-pill bulk">trash bags</span><span class="tag-pill dump">DUMPING</span><span class="tag-pill lit4">Litter 4/4</span><div class="meta">Dominant issue: trash bags on right sidewalk indicating illegal dumping.</div></div>
+  </div>
+  <div class="img-tile" data-src="evidence_cards/new_videos_bulk_items/evidence_v2_frame_0005.png" data-cap="v2_frame_0005 · trash bags · DUMPING">
+    <img src="evidence_cards/new_videos_bulk_items/evidence_v2_frame_0005.png" alt="v2_frame_0005">
+    <div class="caption"><div class="fname">v2_frame_0005.png</div><span class="tag-pill bulk">trash bags</span><span class="tag-pill dump">DUMPING</span><div class="meta">Illegal dumping with trash bags on the right sidewalk.</div></div>
+  </div>
+  <div class="img-tile" data-src="evidence_cards/new_videos_bulk_items/evidence_v2_frame_0012.png" data-cap="v2_frame_0012 · Litter 2/4">
+    <img src="evidence_cards/new_videos_bulk_items/evidence_v2_frame_0012.png" alt="v2_frame_0012">
+    <div class="caption"><div class="fname">v2_frame_0012.png</div><span class="tag-pill lit2">Litter 2/4</span><div class="meta">Minor litter with trash bags on the right sidewalk.</div></div>
+  </div>
+  <div class="img-tile" data-src="evidence_cards/new_videos_bulk_items/evidence_v2_frame_0013.png" data-cap="v2_frame_0013 · hotspot · trash bags · DUMPING · Litter 4/4">
+    <img src="evidence_cards/new_videos_bulk_items/evidence_v2_frame_0013.png" alt="v2_frame_0013">
+    <div class="caption"><div class="fname">v2_frame_0013.png</div><span class="tag-pill bulk">trash bags</span><span class="tag-pill dump">DUMPING</span><span class="tag-pill lit4">Litter 4/4</span><div class="meta">Several trash bags — hotspot begins.</div></div>
+  </div>
+  <div class="img-tile" data-src="evidence_cards/new_videos_bulk_items/evidence_v2_frame_0014.png" data-cap="v2_frame_0014 · trash bags · DUMPING · Litter 3/4">
+    <img src="evidence_cards/new_videos_bulk_items/evidence_v2_frame_0014.png" alt="v2_frame_0014">
+    <div class="caption"><div class="fname">v2_frame_0014.png</div><span class="tag-pill bulk">trash bags</span><span class="tag-pill dump">DUMPING</span><span class="tag-pill lit3">Litter 3/4</span><div class="meta">Continued trash bags on right sidewalk.</div></div>
+  </div>
+  <div class="img-tile" data-src="evidence_cards/new_videos_bulk_items/evidence_v2_frame_0015.png" data-cap="v2_frame_0015 · trash bags · Litter 2/4">
+    <img src="evidence_cards/new_videos_bulk_items/evidence_v2_frame_0015.png" alt="v2_frame_0015">
+    <div class="caption"><div class="fname">v2_frame_0015.png</div><span class="tag-pill bulk">trash bags</span><span class="tag-pill lit2">Litter 2/4</span><div class="meta">Trash bags persisting.</div></div>
+  </div>
+  <div class="img-tile" data-src="evidence_cards/new_videos_bulk_items/evidence_v2_frame_0016.png" data-cap="v2_frame_0016 · trash bags · DUMPING · Litter 4/4">
+    <img src="evidence_cards/new_videos_bulk_items/evidence_v2_frame_0016.png" alt="v2_frame_0016">
+    <div class="caption"><div class="fname">v2_frame_0016.png</div><span class="tag-pill bulk">trash bags</span><span class="tag-pill dump">DUMPING</span><span class="tag-pill lit4">Litter 4/4</span><div class="meta">Several trash bags, severe.</div></div>
+  </div>
+  <div class="img-tile" data-src="evidence_cards/new_videos_bulk_items/evidence_v2_frame_0017.png" data-cap="v2_frame_0017 · trash bags · DUMPING · Litter 3/4">
+    <img src="evidence_cards/new_videos_bulk_items/evidence_v2_frame_0017.png" alt="v2_frame_0017">
+    <div class="caption"><div class="fname">v2_frame_0017.png</div><span class="tag-pill bulk">trash bags</span><span class="tag-pill dump">DUMPING</span><span class="tag-pill lit3">Litter 3/4</span><div class="meta">Trash bags on the right sidewalk.</div></div>
+  </div>
+  <div class="img-tile" data-src="evidence_cards/new_videos_bulk_items/evidence_v2_frame_0030.png" data-cap="v2_frame_0030 · clean with graffiti">
+    <img src="evidence_cards/new_videos_bulk_items/evidence_v2_frame_0030.png" alt="v2_frame_0030">
+    <div class="caption"><div class="fname">v2_frame_0030.png</div><span class="tag-pill neutral">no tags</span><div class="meta">Area generally clean, graffiti on red wall.</div></div>
+  </div>
+</div>
+
+<h2 class="section-title">Video 1 — Textbook Sofa Case</h2>
+<div class="section-note">Frame 7 is the clearest example of the use case Edward defined: no warnings for general litter, but warnings for furniture and bulk items. AI identified a sofa and other furniture on the sidewalk, flagged illegal dumping, and would auto-generate a warning letter in production.</div>
+
+<div class="img-grid">
+  <div class="img-tile" data-src="evidence_cards/new_videos_bulk_items/evidence_v1_frame_0007.png" data-cap="v1_frame_0007 · sofa · furniture · DUMPING">
+    <img src="evidence_cards/new_videos_bulk_items/evidence_v1_frame_0007.png" alt="v1_frame_0007">
+    <div class="caption"><div class="fname">v1_frame_0007.png</div><span class="tag-pill bulk">sofa</span><span class="tag-pill bulk">furniture</span><span class="tag-pill dump">DUMPING</span><span class="tag-pill lit2">Storage 2/4</span><div class="meta">Large furniture items on the right sidewalk.</div></div>
+  </div>
+  <div class="img-tile" data-src="evidence_cards/new_videos_bulk_items/evidence_v1_frame_0026.png" data-cap="v1_frame_0026 · sofa">
+    <img src="evidence_cards/new_videos_bulk_items/evidence_v1_frame_0026.png" alt="v1_frame_0026">
+    <div class="caption"><div class="fname">v1_frame_0026.png</div><span class="tag-pill bulk">sofa</span><div class="meta">Area generally clean with a sofa on the right sidewalk.</div></div>
+  </div>
+</div>
+
+<h2 class="section-title">Video 3 — Semantic Reasoning on "Tarp"</h2>
+<div class="section-note">Video 3 has a more subtle case. A blue tarp on the sidewalk — "tarp" was not in our explicit bulk item list. The AI generalized from the category "large items out of place" to flag it. This shows the system has semantic reasoning, not just pattern matching.</div>
+
+<div class="img-grid">
+  <div class="img-tile" data-src="evidence_cards/new_videos_bulk_items/evidence_v3_frame_0006.png" data-cap="v3_frame_0006 · Litter 2/4">
+    <img src="evidence_cards/new_videos_bulk_items/evidence_v3_frame_0006.png" alt="v3_frame_0006">
+    <div class="caption"><div class="fname">v3_frame_0006.png</div><span class="tag-pill lit2">Litter 2/4</span><div class="meta">Mostly clean with minor litter on the right sidewalk.</div></div>
+  </div>
+  <div class="img-tile" data-src="evidence_cards/new_videos_bulk_items/evidence_v3_frame_0008.png" data-cap="v3_frame_0008 · Litter 2/4">
+    <img src="evidence_cards/new_videos_bulk_items/evidence_v3_frame_0008.png" alt="v3_frame_0008">
+    <div class="caption"><div class="fname">v3_frame_0008.png</div><span class="tag-pill lit2">Litter 2/4</span><div class="meta">Small litter items on right sidewalk.</div></div>
+  </div>
+  <div class="img-tile" data-src="evidence_cards/new_videos_bulk_items/evidence_v3_frame_0013.png" data-cap="v3_frame_0013 · tarp (generalized detection)">
+    <img src="evidence_cards/new_videos_bulk_items/evidence_v3_frame_0013.png" alt="v3_frame_0013">
+    <div class="caption"><div class="fname">v3_frame_0013.png</div><span class="tag-pill bulk">tarp</span><div class="meta">Single tarp-like item on the right sidewalk.</div></div>
+  </div>
+  <div class="img-tile" data-src="evidence_cards/new_videos_bulk_items/evidence_v3_frame_0016.png" data-cap="v3_frame_0016 · Litter 2/4">
+    <img src="evidence_cards/new_videos_bulk_items/evidence_v3_frame_0016.png" alt="v3_frame_0016">
+    <div class="caption"><div class="fname">v3_frame_0016.png</div><span class="tag-pill lit2">Litter 2/4</span><div class="meta">Minor litter on the right sidewalk, no major issues.</div></div>
+  </div>
+</div>
+
+<div class="footer">Click any card to enlarge · USI-P21 · NYU CUSP Capstone</div>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <img id="lightbox-img" src="" alt="">
+  <div class="caption" id="lightbox-cap"></div>
+</div>
+
+<script>
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const lbCap = document.getElementById('lightbox-cap');
+  document.querySelectorAll('.img-tile').forEach(t => {
+    t.addEventListener('click', () => {
+      lbImg.src = t.dataset.src;
+      lbCap.textContent = t.dataset.cap || '';
+      lb.classList.add('open');
+    });
+  });
+  lb.addEventListener('click', () => lb.classList.remove('open'));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Human Reasoning (R-75) · USI-P21</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">USI-P21<span class="sub">AI Street Cleanliness · City of Paterson, NJ</span></div>
+    <div class="topnav-links">
+      <a href="index.html">Calibration</a>
+      <a href="bulk_items.html">Bulk Items</a>
+      <a href="route_maps.html">Route Maps</a>
+      <a href="evidence.html">Evidence</a>
+      <a href="reasoning.html" class="active">Human Reasoning</a>
+      <a href="letters.html">Warning Letters</a>
+      <a href="qa.html">Limitations &amp; Q&amp;A</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+<div class="page-header">
+  <h1>Human Reasoning Per Frame (R-75)</h1>
+  <div class="subtitle">Ground truth for AI calibration. Labeler: Guangyuan Yang · 39 frames · January 23, 2026</div>
+</div>
+
+<div class="highlight-bar">
+  <div class="tag">Proof of validation</div>
+  <h2>Every frame has three fields: (1) the labeler's direct observation, (2) the KAB score derived from it, and (3) the KAB rule applied.</h2>
+  <p>This document is the human-labeled source of truth against which the <a href="index.html" style="color:#34c759;">Calibration Report</a> measures AI output. No score is arbitrary — each one is traceable back to a specific rule and a specific observation.</p>
+</div>
+
+<div class="card reasoning" id="reasoning-container">
+  <p style="color:#6e6e73; text-align:center; padding: 40px;">Loading reasoning document…</p>
+</div>
+
+<div class="footer">Source: <code>04_HUMAN_CALIBRATION/R75_human_reasoning_per_frame.md</code> · USI-P21 · NYU CUSP Capstone</div>
+</div>
+
+<script>
+  fetch('R75_human_reasoning_per_frame.md')
+    .then(r => r.text())
+    .then(md => {
+      // Skip the first H1 since the page already has its own header
+      const body = md.replace(/^# [^\n]+\n/, '');
+      document.getElementById('reasoning-container').innerHTML = marked.parse(body);
+    })
+    .catch(err => {
+      document.getElementById('reasoning-container').innerHTML =
+        '<p style="color:#c62828;">Could not load reasoning document: ' + err + '</p>';
+    });
+</script>
+</body>
+</html>
